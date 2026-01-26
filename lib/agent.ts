@@ -45,11 +45,14 @@ chat: فقط للتحيات (مرحبا, هلا, ازيك) والأسئلة ال
     ],
   });
 
-  const rawText = (await result.text).trim();
-  const cleanedToolName = rawText.toLowerCase().replace(/[^a-z_]/g, '');
+const rawText = (await result.text).trim();
+  const cleanedToolName = rawText
+  .toLowerCase()
+  .replace(/[-\s]/g, '_')      
+  .replace(/[^a-z_]/g, '');   
   console.log(`[Tool Selector] Raw: "${rawText}" -> Cleaned: "${cleanedToolName}"`);
-  return tools[cleanedToolName] ? cleanedToolName : null;
-}
+  //return tools[cleanedToolName] ? cleanedToolName : null;
+  return tools[cleanedToolName] ?? "chat";
 
 // ===== Agent Executor =====
 export async function runAgent(
