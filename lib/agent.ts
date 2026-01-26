@@ -53,6 +53,7 @@ const rawText = (await result.text).trim();
   console.log(`[Tool Selector] Raw: "${rawText}" -> Cleaned: "${cleanedToolName}"`);
   //return tools[cleanedToolName] ? cleanedToolName : null;
   return tools[cleanedToolName] ?? "chat";
+}
 
 // ===== Agent Executor =====
 export async function runAgent(
