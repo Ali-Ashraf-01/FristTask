@@ -1,9 +1,16 @@
-import { streamText } from "ai";
+import { jsonSchema, streamText } from "ai";
 import { model } from "../model";
 
 export const chatTool = {
   name: "chat",
   description: "للمحادثات العادية والتحيات والأسئلة العامة",
+  inputSchema: jsonSchema({
+    type: "object",
+    properties: {
+      input: { type: "string", description: "رسالة المستخدم" },
+    },
+    required: ["input"], 
+  }),
 
   async execute(
     { input }: { input: string },
